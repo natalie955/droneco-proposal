@@ -1091,6 +1091,81 @@
     .row-flash td { animation: row-flash 0.55s ease-out; }
     .total-row.row-flash td { animation: row-flash 0.55s ease-out; }
 
+    /* ── Pricing card — support line ── */
+    .pricing-support-line {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--white);
+      margin-top: 14px;
+      padding-top: 14px;
+      border-top: 1px solid var(--border);
+    }
+
+    .pricing-support-note {
+      font-size: 12px;
+      color: var(--grey);
+      margin-top: 7px;
+      line-height: 1.5;
+    }
+
+    /* ══════════════════════════
+       SUPPORT SECTION
+    ══════════════════════════ */
+    #support { background: var(--bg); }
+
+    .support-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin-top: 48px;
+    }
+
+    @media (max-width: 768px) {
+      .support-cards { grid-template-columns: 1fr; }
+    }
+
+    .support-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 28px;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+
+    .support-card:hover {
+      border-color: var(--border-blue);
+      transform: translateY(-2px);
+    }
+
+    .support-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      background: var(--blue-dim);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 18px;
+      color: var(--blue);
+    }
+
+    .support-card h3 {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 10px;
+      line-height: 1.3;
+    }
+
+    .support-card p {
+      font-size: 14px;
+      color: var(--grey);
+      line-height: 1.6;
+    }
+
     /* ── DroneCo inline SVG logo ── */
     .droneco-logo { display: block; }
     .droneco-logo-sm { display: block; }
@@ -1436,11 +1511,16 @@
           </div>
           <div class="pricing-price-row">
             <span class="pricing-price-label">Monthly retainer</span>
-            <span class="pricing-price-value"><span class="currency">R</span>5,500<span style="font-size:13px;font-weight:500;color:var(--grey);">/mo</span></span>
+            <span class="pricing-price-value"><span class="currency">R</span>1,850<span style="font-size:13px;font-weight:500;color:var(--grey);">/mo</span></span>
           </div>
         </div>
+        <div class="pricing-support-line">
+          <i data-lucide="plus-circle" style="width:14px;height:14px;color:#3b82f6;flex-shrink:0;"></i>
+          R850/hour support, billed only when used
+        </div>
+        <p class="pricing-support-note">Start with what you need — scale support hours as the business grows.</p>
 
-        <div class="pricing-impl">
+        <div class="pricing-impl" style="margin-top:20px;">
           <i data-lucide="clock" style="width:15px;height:15px;"></i>
           4–6 weeks implementation
         </div>
@@ -1495,11 +1575,16 @@
           </div>
           <div class="pricing-price-row">
             <span class="pricing-price-label">Monthly retainer</span>
-            <span class="pricing-price-value"><span class="currency">R</span><span id="opt2-price">9,500</span><span style="font-size:13px;font-weight:500;color:var(--grey);">/mo</span></span>
+            <span class="pricing-price-value"><span class="currency">R</span><span id="opt2-price">2,350</span><span style="font-size:13px;font-weight:500;color:var(--grey);">/mo</span></span>
           </div>
         </div>
+        <div class="pricing-support-line">
+          <i data-lucide="plus-circle" style="width:14px;height:14px;color:#3b82f6;flex-shrink:0;"></i>
+          R850/hour support, billed only when used
+        </div>
+        <p class="pricing-support-note">Start with what you need — scale support hours as the business grows.</p>
 
-        <div class="pricing-impl">
+        <div class="pricing-impl" style="margin-top:20px;">
           <i data-lucide="clock" style="width:15px;height:15px;"></i>
           8–10 weeks implementation
         </div>
@@ -1565,7 +1650,7 @@
       <div class="breakdown-card fade-in fade-in-delay-1">
         <div class="breakdown-card-header">
           <div class="breakdown-card-title">Phase 1 — WhatsApp Operations Layer</div>
-          <span class="badge badge-outline">R5,500/mo</span>
+          <span class="badge badge-outline">R1,850/mo</span>
         </div>
         <table class="breakdown-table">
           <thead>
@@ -1601,15 +1686,10 @@
               <td>Message parsing and anomaly flagging</td>
               <td>R300</td>
             </tr>
-            <tr>
-              <td>Ruppell Management</td>
-              <td>System maintenance, monitoring, support (5hrs)</td>
-              <td>R3,650</td>
-            </tr>
             <tr class="total-row">
               <td>TOTAL</td>
               <td></td>
-              <td>R5,500/mo</td>
+              <td>R1,850/mo</td>
             </tr>
           </tbody>
         </table>
@@ -1622,7 +1702,7 @@
       <div class="breakdown-card featured fade-in fade-in-delay-2">
         <div class="breakdown-card-header">
           <div class="breakdown-card-title">Phase 2 — Full Platform Build</div>
-          <span class="badge badge-blue" id="p2-breakdown-badge">R9,500/mo</span>
+          <span class="badge badge-blue" id="p2-breakdown-badge">R2,350/mo</span>
         </div>
         <table class="breakdown-table">
           <thead>
@@ -1651,7 +1731,7 @@
             <tr>
               <td>Google Cloud</td>
               <td>Expanded storage, backups, encrypted hosting</td>
-              <td>R200</td>
+              <td>R300</td>
             </tr>
             <tr>
               <td>AI API (Claude/OpenAI)</td>
@@ -1663,15 +1743,10 @@
               <td>Google Cloud hosting for the bespoke client portal</td>
               <td>R100</td>
             </tr>
-            <tr id="p2-mgmt-row">
-              <td>Ruppell Management</td>
-              <td>System maintenance, monitoring, support (10hrs)</td>
-              <td id="p2-mgmt-cost">R7,150</td>
-            </tr>
             <tr class="total-row" id="p2-total-row">
               <td>TOTAL</td>
               <td></td>
-              <td id="p2-total-cost">R9,500/mo</td>
+              <td id="p2-total-cost">R2,350/mo</td>
             </tr>
           </tbody>
         </table>
@@ -1684,9 +1759,44 @@
 
     <!-- Trust note -->
     <div class="breakdown-trust fade-in fade-in-delay-3">
-      All third-party tool costs are billed at cost with no markup. Ruppell's fee covers build, management, monitoring, and support. You have full visibility into all platform accounts and invoices.
+      All third-party tool costs are billed at cost with no markup. Support is billed at R850/hour, logged transparently, and invoiced monthly. You have full visibility into all platform accounts and invoices at all times.
     </div>
 
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ══ SUPPORT ══ -->
+<section id="support" class="section">
+  <div class="container">
+    <div class="fade-in" style="text-align:center;">
+      <div class="label" style="margin-bottom:12px;">Flexibility</div>
+      <h2 class="section-title">Support That Works Around You</h2>
+    </div>
+    <div class="support-cards">
+      <div class="support-card fade-in fade-in-delay-1">
+        <div class="support-icon">
+          <i data-lucide="clock" style="width:22px;height:22px;"></i>
+        </div>
+        <h3>Hourly Support — R850/hr</h3>
+        <p>No monthly commitment. You only pay when you need us. Every hour is logged and invoiced transparently.</p>
+      </div>
+      <div class="support-card fade-in fade-in-delay-2">
+        <div class="support-icon">
+          <i data-lucide="trending-up" style="width:22px;height:22px;"></i>
+        </div>
+        <h3>Scale as You Grow</h3>
+        <p>Start lean and increase your support hours as DroneCo expands to more sites, pilots, and clients. No lock-in.</p>
+      </div>
+      <div class="support-card fade-in fade-in-delay-3">
+        <div class="support-icon">
+          <i data-lucide="pause-circle" style="width:22px;height:22px;"></i>
+        </div>
+        <h3>Pause Anytime</h3>
+        <p>If a site goes quiet, pause with 30 days notice. No Ruppell fee during the pause. Tool costs remain active to keep your data safe and your system intact.</p>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -1871,6 +1981,18 @@
     <div class="faq-list">
       <div class="faq-item fade-in fade-in-delay-1">
         <button class="faq-question" onclick="toggleFaq(this)">
+          What if I don't need much support after go-live?
+          <span class="faq-icon"><i data-lucide="plus" style="width:14px;height:14px;"></i></span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">
+            That's completely fine — and honestly expected once the system is running well. You only pay R850/hour when you actually need us. There's no monthly minimum and no pressure to use hours you don't need.
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item fade-in fade-in-delay-2">
+        <button class="faq-question" onclick="toggleFaq(this)">
           What happens if Meta changes WhatsApp pricing?
           <span class="faq-icon"><i data-lucide="plus" style="width:14px;height:14px;"></i></span>
         </button>
@@ -2030,33 +2152,30 @@
     document.getElementById('opt2-monday-note').classList.toggle('hidden', isClickup);
 
     // Update price in card
-    document.getElementById('opt2-price').textContent = isClickup ? '9,500' : '10,500';
+    document.getElementById('opt2-price').textContent = isClickup ? '2,350' : '3,330';
 
-    // Update breakdown table
+    // Update breakdown table PM row
     const pmRow    = document.getElementById('p2-pm-row');
-    const mgmtRow  = document.getElementById('p2-mgmt-row');
     const totalRow = document.getElementById('p2-total-row');
 
     if (isClickup) {
       document.getElementById('p2-pm-tool').textContent  = 'ClickUp Business';
       document.getElementById('p2-pm-desc').textContent  = 'Advanced dashboards, time tracking, multi-site';
       document.getElementById('p2-pm-cost').textContent  = 'R900';
-      document.getElementById('p2-mgmt-cost').textContent = 'R7,150';
-      document.getElementById('p2-total-cost').textContent = 'R9,500/mo';
-      document.getElementById('p2-breakdown-badge').textContent = 'R9,500/mo';
+      document.getElementById('p2-total-cost').textContent = 'R2,350/mo';
+      document.getElementById('p2-breakdown-badge').textContent = 'R2,350/mo';
     } else {
       document.getElementById('p2-pm-tool').textContent  = 'Monday.com Pro (5 users)';
       document.getElementById('p2-pm-desc').textContent  = 'Visual project management, dashboards, time tracking, site oversight';
       document.getElementById('p2-pm-cost').textContent  = 'R1,780';
-      document.getElementById('p2-mgmt-cost').textContent = 'R6,270';
-      document.getElementById('p2-total-cost').textContent = 'R10,500/mo';
-      document.getElementById('p2-breakdown-badge').textContent = 'R10,500/mo';
+      document.getElementById('p2-total-cost').textContent = 'R3,330/mo';
+      document.getElementById('p2-breakdown-badge').textContent = 'R3,330/mo';
     }
 
     // Flash updated rows to draw attention
-    [pmRow, mgmtRow, totalRow].forEach(row => {
+    [pmRow, totalRow].forEach(row => {
       row.classList.remove('row-flash');
-      void row.offsetWidth; // force reflow to restart animation
+      void row.offsetWidth;
       row.classList.add('row-flash');
     });
   }
