@@ -985,6 +985,112 @@
       margin-right: auto;
     }
 
+    /* ══════════════════════════
+       OPTION 2 TABS
+    ══════════════════════════ */
+    .hidden { display: none !important; }
+
+    .opt2-tabs {
+      display: flex;
+      gap: 6px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 4px;
+      margin-bottom: 20px;
+    }
+
+    .opt2-tab {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 9px 12px;
+      border-radius: 7px;
+      border: none;
+      background: transparent;
+      color: var(--grey);
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+    }
+
+    .opt2-tab:hover { color: var(--white); }
+
+    .opt2-tab.active {
+      background: var(--blue);
+      color: #fff;
+      box-shadow: 0 2px 8px rgba(59,130,246,0.35);
+    }
+
+    /* Recommendation pill */
+    .rec-pill {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      padding: 2px 7px;
+      border-radius: 100px;
+      background: rgba(34,197,94,0.15);
+      border: 1px solid rgba(34,197,94,0.35);
+      color: #4ade80;
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      cursor: default;
+      flex-shrink: 0;
+    }
+
+    .rec-pill::after {
+      content: attr(data-tooltip);
+      position: absolute;
+      bottom: calc(100% + 8px);
+      left: 50%;
+      transform: translateX(-50%);
+      background: #1c1c2e;
+      color: #e5e7eb;
+      font-size: 11px;
+      font-weight: 400;
+      letter-spacing: 0;
+      text-transform: none;
+      padding: 7px 11px;
+      border-radius: 7px;
+      border: 1px solid rgba(255,255,255,0.1);
+      white-space: nowrap;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.18s ease;
+      z-index: 20;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+    }
+
+    .rec-pill:hover::after { opacity: 1; }
+
+    /* Monday note */
+    .monday-note {
+      margin-top: 14px;
+      padding: 11px 14px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--border);
+      border-left: 3px solid #f59e0b;
+      border-radius: 0 8px 8px 0;
+      font-size: 12.5px;
+      color: var(--grey);
+      line-height: 1.55;
+    }
+
+    /* Breakdown row flash on tab switch */
+    @keyframes row-flash {
+      0%   { background: rgba(59,130,246,0.18); }
+      100% { background: transparent; }
+    }
+    .row-flash td { animation: row-flash 0.55s ease-out; }
+    .total-row.row-flash td { animation: row-flash 0.55s ease-out; }
+
     /* ── DroneCo inline SVG logo ── */
     .droneco-logo { display: block; }
     .droneco-logo-sm { display: block; }
@@ -1367,6 +1473,18 @@
           <span class="badge badge-outline">Phase 2 — Scale Up</span>
           <span class="badge badge-blue">Most Popular</span>
         </div>
+
+        <!-- ── Tab switcher ── -->
+        <div class="opt2-tabs">
+          <button class="opt2-tab active" id="tab-clickup" onclick="switchOpt2Tab('clickup')">
+            ClickUp Business
+            <span class="rec-pill" data-tooltip="Better value at this team size. Upgrade path available if needed.">Our recommendation</span>
+          </button>
+          <button class="opt2-tab" id="tab-monday" onclick="switchOpt2Tab('monday')">
+            Monday.com Pro
+          </button>
+        </div>
+
         <div class="pricing-name">Full Platform Build</div>
         <div class="pricing-desc">Everything in Phase 1, plus a fully owned custom client portal, predictive risk models, and white-label reporting per site.</div>
 
@@ -1377,7 +1495,7 @@
           </div>
           <div class="pricing-price-row">
             <span class="pricing-price-label">Monthly retainer</span>
-            <span class="pricing-price-value"><span class="currency">R</span>9,500<span style="font-size:13px;font-weight:500;color:var(--grey);">/mo</span></span>
+            <span class="pricing-price-value"><span class="currency">R</span><span id="opt2-price">9,500</span><span style="font-size:13px;font-weight:500;color:var(--grey);">/mo</span></span>
           </div>
         </div>
 
@@ -1389,7 +1507,8 @@
         <div class="pricing-divider"></div>
         <div class="pricing-includes-label">Everything in Phase 1, plus</div>
 
-        <ul class="pricing-feature-list">
+        <!-- ClickUp feature list (default) -->
+        <ul class="pricing-feature-list" id="opt2-features-clickup">
           <li class="plus-item"><i data-lucide="plus" class="check" style="width:15px;height:15px;color:#3b82f6;"></i>Custom-built client portal (fully owned by DroneCo — no third-party portal subscriptions)</li>
           <li class="plus-item"><i data-lucide="plus" class="check" style="width:15px;height:15px;color:#3b82f6;"></i>Branded dashboards per client with custom KPIs</li>
           <li class="plus-item"><i data-lucide="plus" class="check" style="width:15px;height:15px;color:#3b82f6;"></i>Historical incident and flight data access per client</li>
@@ -1400,6 +1519,24 @@
           <li class="plus-item"><i data-lucide="plus" class="check" style="width:15px;height:15px;color:#3b82f6;"></i>ClickUp Business (5 users) — advanced dashboards, time tracking, and workload management per site</li>
           <li class="plus-item"><i data-lucide="plus" class="check" style="width:15px;height:15px;color:#3b82f6;"></i>10 hours/month support</li>
         </ul>
+
+        <!-- Monday.com feature list (hidden) -->
+        <ul class="pricing-feature-list hidden" id="opt2-features-monday">
+          <li class="plus-item"><i data-lucide="plus" class="check" style="width:15px;height:15px;color:#3b82f6;"></i>Custom-built client portal (fully owned by DroneCo — no third-party portal subscriptions)</li>
+          <li class="plus-item"><i data-lucide="plus" class="check" style="width:15px;height:15px;color:#3b82f6;"></i>Branded dashboards per client with custom KPIs</li>
+          <li class="plus-item"><i data-lucide="plus" class="check" style="width:15px;height:15px;color:#3b82f6;"></i>Historical incident and flight data access per client</li>
+          <li class="plus-item"><i data-lucide="plus" class="check" style="width:15px;height:15px;color:#3b82f6;"></i>Predictive risk modelling trained on existing WhatsApp chat history</li>
+          <li class="plus-item"><i data-lucide="plus" class="check" style="width:15px;height:15px;color:#3b82f6;"></i>Multi-site and multi-pilot architecture</li>
+          <li class="plus-item"><i data-lucide="plus" class="check" style="width:15px;height:15px;color:#3b82f6;"></i>White-label reporting with DroneCo branding per site</li>
+          <li class="plus-item"><i data-lucide="plus" class="check" style="width:15px;height:15px;color:#3b82f6;"></i>Advanced n8n workflow automation across all operations</li>
+          <li class="plus-item"><i data-lucide="plus" class="check" style="width:15px;height:15px;color:#3b82f6;"></i>Monday.com Pro (5 users) — visual project management, dashboards, time tracking, and site oversight</li>
+          <li class="plus-item"><i data-lucide="plus" class="check" style="width:15px;height:15px;color:#3b82f6;"></i>10 hours/month support</li>
+        </ul>
+
+        <!-- Monday.com note (hidden) -->
+        <div class="monday-note hidden" id="opt2-monday-note">
+          Monday.com Pro costs approximately double ClickUp at this team size, but offers a more visual interface that may suit daily pilot use.
+        </div>
 
         <a href="mailto:natalie@ruppell.co.za?subject=DroneCo%20%E2%80%94%20Accepting%20Phase%202" class="btn btn-primary pricing-cta">
           <i data-lucide="arrow-right" style="width:16px;height:16px;"></i>
@@ -1485,7 +1622,7 @@
       <div class="breakdown-card featured fade-in fade-in-delay-2">
         <div class="breakdown-card-header">
           <div class="breakdown-card-title">Phase 2 — Full Platform Build</div>
-          <span class="badge badge-blue">R9,500/mo</span>
+          <span class="badge badge-blue" id="p2-breakdown-badge">R9,500/mo</span>
         </div>
         <table class="breakdown-table">
           <thead>
@@ -1506,10 +1643,10 @@
               <td>Advanced automation across all operations</td>
               <td>R350</td>
             </tr>
-            <tr>
-              <td>ClickUp Business</td>
-              <td>Advanced dashboards, time tracking, multi-site</td>
-              <td>R900</td>
+            <tr id="p2-pm-row">
+              <td id="p2-pm-tool">ClickUp Business</td>
+              <td id="p2-pm-desc">Advanced dashboards, time tracking, multi-site</td>
+              <td id="p2-pm-cost">R900</td>
             </tr>
             <tr>
               <td>Google Cloud</td>
@@ -1526,15 +1663,15 @@
               <td>Google Cloud hosting for the bespoke client portal</td>
               <td>R100</td>
             </tr>
-            <tr>
+            <tr id="p2-mgmt-row">
               <td>Ruppell Management</td>
               <td>System maintenance, monitoring, support (10hrs)</td>
-              <td>R7,150</td>
+              <td id="p2-mgmt-cost">R7,150</td>
             </tr>
-            <tr class="total-row">
+            <tr class="total-row" id="p2-total-row">
               <td>TOTAL</td>
               <td></td>
-              <td>R9,500/mo</td>
+              <td id="p2-total-cost">R9,500/mo</td>
             </tr>
           </tbody>
         </table>
@@ -1877,6 +2014,53 @@
 </footer>
 
 <script>
+  // ── Option 2 tab switcher ──
+  function switchOpt2Tab(tab) {
+    const isClickup = tab === 'clickup';
+
+    // Update tab button states
+    document.getElementById('tab-clickup').classList.toggle('active', isClickup);
+    document.getElementById('tab-monday').classList.toggle('active', !isClickup);
+
+    // Swap feature lists
+    document.getElementById('opt2-features-clickup').classList.toggle('hidden', !isClickup);
+    document.getElementById('opt2-features-monday').classList.toggle('hidden', isClickup);
+
+    // Show/hide Monday note
+    document.getElementById('opt2-monday-note').classList.toggle('hidden', isClickup);
+
+    // Update price in card
+    document.getElementById('opt2-price').textContent = isClickup ? '9,500' : '10,500';
+
+    // Update breakdown table
+    const pmRow    = document.getElementById('p2-pm-row');
+    const mgmtRow  = document.getElementById('p2-mgmt-row');
+    const totalRow = document.getElementById('p2-total-row');
+
+    if (isClickup) {
+      document.getElementById('p2-pm-tool').textContent  = 'ClickUp Business';
+      document.getElementById('p2-pm-desc').textContent  = 'Advanced dashboards, time tracking, multi-site';
+      document.getElementById('p2-pm-cost').textContent  = 'R900';
+      document.getElementById('p2-mgmt-cost').textContent = 'R7,150';
+      document.getElementById('p2-total-cost').textContent = 'R9,500/mo';
+      document.getElementById('p2-breakdown-badge').textContent = 'R9,500/mo';
+    } else {
+      document.getElementById('p2-pm-tool').textContent  = 'Monday.com Pro (5 users)';
+      document.getElementById('p2-pm-desc').textContent  = 'Visual project management, dashboards, time tracking, site oversight';
+      document.getElementById('p2-pm-cost').textContent  = 'R1,780';
+      document.getElementById('p2-mgmt-cost').textContent = 'R6,270';
+      document.getElementById('p2-total-cost').textContent = 'R10,500/mo';
+      document.getElementById('p2-breakdown-badge').textContent = 'R10,500/mo';
+    }
+
+    // Flash updated rows to draw attention
+    [pmRow, mgmtRow, totalRow].forEach(row => {
+      row.classList.remove('row-flash');
+      void row.offsetWidth; // force reflow to restart animation
+      row.classList.add('row-flash');
+    });
+  }
+
   // ── Lucide icons ──
   lucide.createIcons();
 
